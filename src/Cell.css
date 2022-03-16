@@ -1,0 +1,17 @@
+.Cell {
+    width: 20%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Cell:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.IsSelected {
+    background-color: red;
+}
