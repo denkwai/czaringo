@@ -1,4 +1,4 @@
-const SIZE = 4;
+const SIZE = 5;
 
 export {
     SIZE
