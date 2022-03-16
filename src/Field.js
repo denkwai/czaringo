@@ -19,6 +19,7 @@ function Field({gameOver = false, setGameOver = () => {}}) {
                 return (<Cell key={`[${rowIndex},${columnIndex}]`}
                               text={text}
                               onClick={() => {(!isSelected && !gameOver) && selectAnswer(rowIndex, columnIndex)}}
+                              onRemoveClick={() => {(isSelected && !gameOver) && deselectAnswer(rowIndex, columnIndex) }}
                               isSelected={isSelected} />)
             })}
         </div>
@@ -28,6 +29,14 @@ function Field({gameOver = false, setGameOver = () => {}}) {
         const newAnswerMap = [...answerMap]
 
         newAnswerMap[row][column] = true;
+
+        setAnswerMap(newAnswerMap);
+    }
+
+    function deselectAnswer(row = 0, column = 0) {
+        const newAnswerMap = [...answerMap]
+
+        newAnswerMap[row][column] = false;
 
         setAnswerMap(newAnswerMap);
     }

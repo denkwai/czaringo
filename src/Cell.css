@@ -8,6 +8,7 @@
     border-right: 1px solid green;
     padding: .5rem;
     font-family: 'Fira Sans Condensed';
+    position: relative;
 }
 
 .Cell:last-child {
@@ -24,6 +25,21 @@
     background-color: lightgreen;
     color: darkgreen;
     font-weight: 700;
+}
+
+.CellDeselect {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(215, 0, 0, .7);
+    display: block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+    font-weight: 400;
 }
 
 @media (min-width: 500px) {
