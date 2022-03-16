@@ -1,7 +1,12 @@
 .Field {
-
+    padding: 1rem;
 }
 
 .Row {
     display: flex;
+    border-bottom: 1px solid green;
+}
+
+.Row:last-child {
+    border-bottom: 0;
 }

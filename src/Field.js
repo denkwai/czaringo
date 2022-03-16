@@ -7,7 +7,7 @@ import { SIZE } from './constants';
 
 import './Field.css';
 
-function Field() {
+function Field({gameOver = false, setGameOver = () => {}}) {
     const [answerMap, setAnswerMap] = React.useState(createAnswerMap(SIZE));
     const [grid, setGrid] = React.useState(createGrid(questions, SIZE))
     const rows = grid.map(createRow);
@@ -18,7 +18,7 @@ function Field() {
                 const isSelected = answerMap[rowIndex][columnIndex];
                 return (<Cell key={`[${rowIndex},${columnIndex}]`}
                               text={text}
-                              onClick={() => {!isSelected && selectAnswer(rowIndex, columnIndex)}}
+                              onClick={() => {(!isSelected && !gameOver) && selectAnswer(rowIndex, columnIndex)}}
                               isSelected={isSelected} />)
             })}
         </div>
@@ -35,15 +35,24 @@ function Field() {
     function resetGame() {
         setGrid(createGrid(questions, SIZE));
         setAnswerMap(createAnswerMap(SIZE));
+        setGameOver(false);
     }
 
     React.useEffect(() => {
         if (checkMapForWin(answerMap)) {
+            setGameOver(true);
+
             if(window.confirm('Bingo! Do you want to play again?')) {
                 resetGame()
             }
         }
-    }, [answerMap])
+    }, [answerMap, setGameOver])
+
+    React.useEffect(() => {
+        if (!gameOver) {
+            resetGame()
+        }
+    }, [gameOver])
 
     return <main className='Field'>
         {rows}
