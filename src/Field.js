@@ -9,7 +9,7 @@ import { SIZE } from './constants';
 import './Field.css';
 
 function Field({gameOver = false, setGameOver = () => {}}) {
-    const [answerMap, setAnswerMap, { isPersistent }] = useLocalStorageState('answerMap', { defaultValue: createAnswerMap(SIZE) });
+    const [answerMap, setAnswerMap] = useLocalStorageState('answerMap', { defaultValue: createAnswerMap(SIZE) });
     const [grid, setGrid] = useLocalStorageState('grid', { defaultValue: createGrid(questions, SIZE) })
     const rows = grid.map(createRow);
 
@@ -49,7 +49,6 @@ function Field({gameOver = false, setGameOver = () => {}}) {
     }
 
     React.useEffect(() => {
-        console.log(isPersistent);
         if (checkMapForWin(answerMap)) {
             setGameOver(true);
 
@@ -60,14 +59,18 @@ function Field({gameOver = false, setGameOver = () => {}}) {
     }, [answerMap, setGameOver])
 
     React.useEffect(() => {
-        if (!gameOver) {
+        if (gameOver) {
             resetGame()
         }
     }, [gameOver])
 
-    return <main className='Field'>
-        {rows}
-    </main>
+    return <>
+        <button className="ResetGameButton" onClick={() => { resetGame() }}>🔃 new game</button>
+
+        <main className='Field'>
+            {rows}
+        </main>
+    </>
 }
 
 export default Field;

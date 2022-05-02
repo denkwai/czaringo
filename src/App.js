@@ -11,10 +11,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         czaringo
-
-        {gameOver && (
-          <button className="ResetGameButton" onClick={() => { setGameOver(false) }}>🔃 new game</button>
-        )}
       </header>
 
       <Field gameOver={gameOver} setGameOver={setGameOver} />

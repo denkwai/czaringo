@@ -37,11 +37,3 @@
     transform: rotate(360deg);
   }
 }
-
-.ResetGameButton {
-  font-size: 20px;
-  padding: .3rem .7rem .5rem .5rem;
-  margin: 0;
-  border: 0;
-  background: grey;
-}
