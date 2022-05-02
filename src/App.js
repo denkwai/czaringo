@@ -1,10 +1,11 @@
 import React from 'react';
+import useLocalStorageState from 'use-local-storage-state';
 
 import './App.css';
 import Field from './Field';
 
 function App() {
-  const [gameOver, setGameOver] = React.useState(false);
+  const [gameOver, setGameOver] = useLocalStorageState('isGameOver', { defaultValue: false });
 
   return (
     <div className="App">

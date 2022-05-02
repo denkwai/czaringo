@@ -1,4 +1,5 @@
 import React from 'react';
+import useLocalStorageState from 'use-local-storage-state';
 
 import questions from './data/questions.json';
 import Cell from './Cell';
@@ -8,8 +9,8 @@ import { SIZE } from './constants';
 import './Field.css';
 
 function Field({gameOver = false, setGameOver = () => {}}) {
-    const [answerMap, setAnswerMap] = React.useState(createAnswerMap(SIZE));
-    const [grid, setGrid] = React.useState(createGrid(questions, SIZE))
+    const [answerMap, setAnswerMap, { isPersistent }] = useLocalStorageState('answerMap', { defaultValue: createAnswerMap(SIZE) });
+    const [grid, setGrid] = useLocalStorageState('grid', { defaultValue: createGrid(questions, SIZE) })
     const rows = grid.map(createRow);
 
     function createRow(rowArray = [], rowIndex = 0) {
@@ -48,6 +49,7 @@ function Field({gameOver = false, setGameOver = () => {}}) {
     }
 
     React.useEffect(() => {
+        console.log(isPersistent);
         if (checkMapForWin(answerMap)) {
             setGameOver(true);
 
